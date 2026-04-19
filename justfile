@@ -1,14 +1,20 @@
+alias a := audit
 alias b := build
 alias c := check
+alias cd := clean-dry-run
+alias cs := changeset
+alias css := changeset-status
 alias d := dev
 alias f := format
 alias fc := format-check
 alias i := install
 alias l := lint
 alias lf := lint-fix
+alias o := outdated
 alias s := start
 alias tc := typecheck
 alias t := test
+alias vp := version-packages
 alias ws := workspace
 
 # List available project commands
@@ -40,6 +46,14 @@ typecheck:
 test:
   bun run test
 
+# Audit dependencies for known vulnerabilities
+audit:
+  bun run audit
+
+# Show available dependency updates
+outdated:
+  bun run deps:outdated
+
 # Lint the repository
 lint:
   bun run lint
@@ -61,7 +75,23 @@ check: format-check lint typecheck test build
 
 # Remove install and build artifacts
 clean:
-  rm -rf node_modules coverage packages/*/dist packages/*/*.tsbuildinfo
+  bun run clean
+
+# Preview cleanup targets without deleting files
+clean-dry-run:
+  bun run clean:dry-run
+
+# Create a changeset for release notes and versioning
+changeset:
+  bun run changeset
+
+# Show pending changesets and resulting package versions
+changeset-status:
+  bun run changeset:status
+
+# Apply version bumps from queued changesets
+version-packages:
+  bun run version-packages
 
 # Run a Bun script in a specific workspace
 workspace package +args:

@@ -13,18 +13,27 @@
     "typescript": "6.0.3"
   },
   "scripts": {
+    "audit": "bun audit",
     "build": "bun run --workspaces build",
+    "changeset": "bun ./node_modules/@changesets/cli/bin.js",
+    "changeset:status": "bun ./node_modules/@changesets/cli/bin.js status --verbose",
     "check": "bun run format:check && bun run lint && bun run typecheck && bun run test && bun run build",
+    "clean": "bun run scripts/clean.ts",
+    "clean:dry-run": "bun run scripts/clean.ts --dry-run",
+    "deps:outdated": "bun outdated",
     "dev": "bun run --filter @bun-mono-template/app dev",
-    "start": "bun run --filter @bun-mono-template/app start",
-    "lint": "eslint . --max-warnings=0",
-    "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "start": "bun run --filter @bun-mono-template/app start",
     "test": "bun test --path-ignore-patterns '**/dist/**'",
-    "typecheck": "bun x tsc -b --emitDeclarationOnly --force"
+    "typecheck": "bun x tsc -b --emitDeclarationOnly --force",
+    "version-packages": "bun ./node_modules/@changesets/cli/bin.js version"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.31.0",
     "@eslint/js": "^10.0.1",
     "@types/bun": "catalog:",
     "eslint": "^10.2.1",
@@ -36,7 +45,7 @@
     "typescript-eslint": "^8.58.2"
   },
   "engines": {
-    "bun": ">=1.3.0"
+    "bun": ">=1.3.12"
   },
   "packageManager": "bun@1.3.12"
 }
