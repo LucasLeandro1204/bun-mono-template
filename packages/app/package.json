@@ -1,0 +1,14 @@
+{
+  "name": "@bun-mono-template/app",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "typecheck": "bun x tsc -b . --emitDeclarationOnly --force"
+  },
+  "dependencies": {
+    "@bun-mono-template/shared": "workspace:*"
+  }
+}

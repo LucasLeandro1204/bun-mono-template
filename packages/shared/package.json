@@ -1,0 +1,15 @@
+{
+  "name": "@bun-mono-template/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "bun x tsc -p .",
+    "typecheck": "bun x tsc -b . --emitDeclarationOnly --force"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}
