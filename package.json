@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "description": "Production-ready Bun monorepo template with TypeScript references and workspace packages.",
+  "license": "Apache-2.0",
   "workspaces": [
     "packages/*"
   ],
@@ -12,12 +14,15 @@
   },
   "scripts": {
     "build": "bun run --workspaces build",
-    "typecheck": "bun x tsc -b --emitDeclarationOnly --force",
+    "check": "bun run format:check && bun run lint && bun run typecheck && bun run test && bun run build",
     "dev": "bun run --filter @bun-mono-template/app dev",
+    "start": "bun run --filter @bun-mono-template/app start",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "test": "bun test --path-ignore-patterns '**/dist/**'",
+    "typecheck": "bun x tsc -b --emitDeclarationOnly --force"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

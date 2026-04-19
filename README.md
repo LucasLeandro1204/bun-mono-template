@@ -1,57 +1,61 @@
 # bun-mono-template
 
-Bun monorepo template using Bun workspaces and TypeScript references.
+Production-ready Bun monorepo template using Bun workspaces, TypeScript project references, and a single local/CI quality gate.
 
 ## Requirements
 
-- Install Bun (latest): https://bun.com/docs/pm/cli/install
-- Install Just: https://just.systems/man/en/
+- Install Bun `>=1.3.0`: https://bun.com/docs/pm/cli/install
+- Install Just (optional command runner): https://just.systems/man/en/
 
-## Setup
+## Quick Start
 
-1. Install Bun packages
+With Bun directly:
+
+```bash
+bun install
+bun run check
+bun run dev
+```
+
+With `just` convenience recipes:
 
 ```bash
 just install
-```
-
-2. Run all workspace builds
-
-```bash
-just build
-```
-
-3. Type-check all workspaces
-
-```bash
-just typecheck
-```
-
-4. Run the app package in dev mode
-
-```bash
+just check
 just dev
 ```
 
-## Common recipes
+Build and run the production bundle:
 
 ```bash
-just          # list available recipes
-just check    # format check, lint, typecheck, and build
-just lint
-just lint-fix
-just format
-just clean
+bun run build
+bun run start
 ```
 
-Run a script inside a specific workspace:
+Set `APP_NAME` to customize the runtime greeting:
 
 ```bash
-just workspace @bun-mono-template/app dev
-just workspace @bun-mono-template/shared build
+APP_NAME="Production" bun run dev
 ```
 
-## Workspace layout
+## Quality Gates
+
+- `bun run format:check` checks repository formatting.
+- `bun run lint` validates code quality with ESLint.
+- `bun run typecheck` verifies TypeScript project references.
+- `bun run test` runs the Bun test suite while ignoring compiled `dist/` output.
+- `bun run build` emits production `dist/` artifacts for each workspace.
+- `bun run check` runs the same full validation gate used by CI.
+
+Equivalent `just` recipes are available for the main workflows, including `just check`, `just test`, and `just start`.
+
+## Workspace Layout
 
 - `packages/shared` - internal shared library
 - `packages/app` - application package consuming `@bun-mono-template/shared`
+
+## Production Notes
+
+- Workspace packages resolve to source through Bun's `bun` export condition during development, while external consumers receive compiled `dist/` artifacts.
+- The app entrypoint is import-safe and testable, so importing it in tooling or tests does not trigger unexpected console output.
+- Continuous integration runs `bun run check` on every pull request and on pushes to `main`.

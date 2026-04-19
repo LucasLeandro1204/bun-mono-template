@@ -6,7 +6,9 @@ alias fc := format-check
 alias i := install
 alias l := lint
 alias lf := lint-fix
+alias s := start
 alias tc := typecheck
+alias t := test
 alias ws := workspace
 
 # List available project commands
@@ -22,6 +24,10 @@ install:
 dev:
   bun run dev
 
+# Run the built app workspace
+start:
+  bun run start
+
 # Build all workspaces
 build:
   bun run build
@@ -29,6 +35,10 @@ build:
 # Type-check all workspaces
 typecheck:
   bun run typecheck
+
+# Run the test suite
+test:
+  bun run test
 
 # Lint the repository
 lint:
@@ -47,11 +57,11 @@ format-check:
   bun run format:check
 
 # Run the main validation suite
-check: format-check lint typecheck build
+check: format-check lint typecheck test build
 
 # Remove install and build artifacts
 clean:
-  rm -rf node_modules packages/*/dist
+  rm -rf node_modules coverage packages/*/dist packages/*/*.tsbuildinfo
 
 # Run a Bun script in a specific workspace
 workspace package +args:
