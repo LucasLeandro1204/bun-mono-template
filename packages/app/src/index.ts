@@ -1,4 +1,3 @@
-import { greet } from "@bun-mono-template/shared";
+import { greet } from '@bun-mono-template/shared';
 
-console.log(greet("Bun"));
-
+console.log(greet('Bun'));

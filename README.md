@@ -9,21 +9,25 @@ Bun monorepo template using Bun workspaces and TypeScript references.
 ## Setup
 
 1. Install Bun packages
+
 ```bash
 bun install
 ```
 
 2. Run all workspace builds
+
 ```bash
 bun run build
 ```
 
 3. Type-check all workspaces
+
 ```bash
 bun run typecheck
 ```
 
 4. Run the app package in dev mode
+
 ```bash
 bun run dev
 ```

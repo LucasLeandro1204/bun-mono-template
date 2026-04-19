@@ -5,18 +5,14 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 const packages = ['@bun-mono-template/app', '@bun-mono-template/shared', '#root'];
+const internalGlobalPattern = `^(${packages
+  .map((name) => name.replaceAll('/', '\\/').replaceAll('@', '\\@'))
+  .join('|')})$`;
 
 export default tseslint.config(
   {
     name: 'bun-mono-template/ignore',
-    ignores: [
-      '**/.adminjs/**',
-      '**/coverage/**',
-      '**/dist/**',
-      '**/node_modules/**',
-      '**/*.d.ts',
-      '**/*.tsbuildinfo',
-    ],
+    ignores: ['**/.adminjs/**', '**/coverage/**', '**/dist/**', '**/node_modules/**', '**/*.d.ts', '**/*.tsbuildinfo'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -27,8 +23,8 @@ export default tseslint.config(
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
-        ...globals.bun,
         ...globals.node,
+        ...globals.bunBuiltin,
       },
     },
   },
@@ -43,25 +39,23 @@ export default tseslint.config(
       'perfectionist/sort-imports': [
         'error',
         {
-          customGroups: {
-            value: {
-              'internal-global': packages,
+          customGroups: [
+            {
+              elementNamePattern: internalGlobalPattern,
+              groupName: 'internal-global',
             },
-          },
+          ],
           groups: [
             'type',
             'builtin',
             'external',
-            'internal-type',
             'internal-global',
             'internal',
-            ['parent-type', 'sibling-type', 'index-type'],
             ['parent', 'sibling', 'index'],
-            'object',
             'unknown',
           ],
           internalPattern: ['^@bun-mono-template/.*', '^#.*'],
-          newlinesBetween: 'never',
+          newlinesBetween: 0,
         },
       ],
       'perfectionist/sort-named-exports': ['error'],
