@@ -5,31 +5,50 @@ Bun monorepo template using Bun workspaces and TypeScript references.
 ## Requirements
 
 - Install Bun (latest): https://bun.com/docs/pm/cli/install
+- Install Just: https://just.systems/man/en/
 
 ## Setup
 
 1. Install Bun packages
 
 ```bash
-bun install
+just install
 ```
 
 2. Run all workspace builds
 
 ```bash
-bun run build
+just build
 ```
 
 3. Type-check all workspaces
 
 ```bash
-bun run typecheck
+just typecheck
 ```
 
 4. Run the app package in dev mode
 
 ```bash
-bun run dev
+just dev
+```
+
+## Common recipes
+
+```bash
+just          # list available recipes
+just check    # format check, lint, typecheck, and build
+just lint
+just lint-fix
+just format
+just clean
+```
+
+Run a script inside a specific workspace:
+
+```bash
+just workspace @bun-mono-template/app dev
+just workspace @bun-mono-template/shared build
 ```
 
 ## Workspace layout
