@@ -25,6 +25,7 @@
     }
   },
   "dependencies": {
-    "@bun-mono-template/shared": "workspace:*"
+    "@bun-mono-template/shared": "workspace:*",
+    "zod": "^4.1.12"
   }
 }
