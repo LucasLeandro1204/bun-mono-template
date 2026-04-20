@@ -12,7 +12,7 @@
   "scripts": {
     "build": "bun x tsc -p . --emitDeclarationOnly && bun build src/index.ts --outdir dist --target bun --production --sourcemap=external",
     "dev": "bun run --watch src/index.ts",
-    "start": "bun run src/index.ts",
+    "start": "bun run dist/index.js",
     "test": "bun test --path-ignore-patterns '**/dist/**'",
     "typecheck": "bun x tsc -b . --emitDeclarationOnly --force"
   },
