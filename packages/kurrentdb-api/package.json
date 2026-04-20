@@ -1,0 +1,30 @@
+{
+  "name": "@bun-mono-template/kurrentdb-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun x tsc -p . --emitDeclarationOnly && bun build src/index.ts --outdir dist --target bun --production --sourcemap=external",
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "test": "bun test --path-ignore-patterns '**/dist/**'",
+    "typecheck": "bun x tsc -b . --emitDeclarationOnly --force"
+  },
+  "exports": {
+    ".": {
+      "bun": "./src/index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "dependencies": {
+    "@bun-mono-template/shared": "workspace:*"
+  }
+}
