@@ -13,14 +13,14 @@
   "scripts": {
     "build": "bun x tsc -p .",
     "test": "bun test --path-ignore-patterns '**/dist/**'",
-    "typecheck": "bun x tsc -b . --emitDeclarationOnly --force"
+    "typecheck": "bun x tsc -p test/tsconfig.json --noEmit"
   },
   "exports": {
     ".": {
-      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "bun": "./dist/index.js",
       "import": "./dist/index.js",
-      "default": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "default": "./dist/index.js"
     }
   }
 }

@@ -17,7 +17,7 @@
     "build": "bun run --workspaces build",
     "changeset": "bun ./node_modules/@changesets/cli/bin.js",
     "changeset:status": "bun ./node_modules/@changesets/cli/bin.js status --verbose",
-    "check": "bun run format:check && bun run lint && bun run typecheck && bun run test && bun run build",
+    "check": "bun run format:check && bun run lint && bun run typecheck && bun run test:coverage && bun run build",
     "clean": "bun run scripts/clean.ts",
     "clean:dry-run": "bun run scripts/clean.ts --dry-run",
     "deps:outdated": "bun outdated",
@@ -28,7 +28,8 @@
     "lint:fix": "eslint . --fix",
     "start": "bun run --filter @bun-mono-template/app start",
     "test": "bun test --path-ignore-patterns '**/dist/**'",
-    "typecheck": "bun x tsc -b --emitDeclarationOnly --force",
+    "test:coverage": "bun test --coverage --path-ignore-patterns '**/dist/**'",
+    "typecheck": "bun x tsc -p tsconfig.typecheck.json --noEmit && bun x tsc -p packages/shared/test/tsconfig.json --noEmit && bun x tsc -p packages/app/test/tsconfig.json --noEmit",
     "version-packages": "bun ./node_modules/@changesets/cli/bin.js version"
   },
   "devDependencies": {

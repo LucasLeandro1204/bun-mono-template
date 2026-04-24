@@ -13,6 +13,7 @@ alias lf := lint-fix
 alias o := outdated
 alias s := start
 alias t := test
+alias tcov := test-coverage
 alias tc := typecheck
 alias vp := version-packages
 alias ws := workspace
@@ -69,6 +70,10 @@ typecheck: (_run "typecheck")
 [group('Quality')]
 test: (_run "test")
 
+# Run the test suite with coverage thresholds
+[group('Quality')]
+test-coverage: (_run "test:coverage")
+
 # Audit dependencies for known vulnerabilities
 [group('Quality')]
 audit: (_run "audit")
@@ -95,7 +100,7 @@ format-check: (_run "format:check")
 
 # Run the main validation suite
 [group('Quality')]
-check: format-check lint typecheck test build
+check: format-check lint typecheck test-coverage build
 
 # Remove install and build artifacts
 [group('Maintenance')]

@@ -1,21 +1,18 @@
-name: CI
+name: Release Dry Run
 
 on:
-  pull_request:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
+  group: release-dry-run-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  verify:
-    name: Verify
+  preflight:
+    name: Release preflight
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
