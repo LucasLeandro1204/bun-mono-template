@@ -4,7 +4,7 @@ import perfectionist from 'eslint-plugin-perfectionist';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-const packages = ['@bun-mono-template/cli', '@bun-mono-template/shared', '#root'];
+const packages = ['@bun-mono-template/app-cli','@bun-mono-template/app-server', '@bun-mono-template/shared', '#root'];
 const internalGlobalPattern = `^(${packages
   .map((name) => name.replaceAll('/', '\\/').replaceAll('@', '\\@'))
   .join('|')})$`;

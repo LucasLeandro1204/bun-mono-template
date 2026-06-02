@@ -5,6 +5,9 @@
       "path": "./apps/cli"
     },
     {
+      "path": "./apps/server"
+    },
+    {
       "path": "./packages/shared"
     }
   ]
