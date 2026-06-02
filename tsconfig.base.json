@@ -15,9 +15,6 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
-    "types": ["bun"],
-    "paths": {
-      "@bun-mono-template/shared": ["./packages/shared/src"]
-    }
+    "types": ["bun"]
   }
 }

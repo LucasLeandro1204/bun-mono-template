@@ -1,16 +1,15 @@
 import { readdir, readFile, rm, stat } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, argv, Glob } from 'bun';
 
 const scriptPath = fileURLToPath(import.meta.url);
 const repoRoot = resolve(dirname(scriptPath), '..');
-const dryRun = Bun.argv.includes('--dry-run');
+const dryRun = argv.includes('--dry-run');
 
 type PackageJson = {
-  packageManager?: unknown;
-  private?: unknown;
-  scripts?: Record<string, unknown>;
-  workspaces?: unknown;
+  private?: boolean;
+  scripts?: Record<string, string>;
+  engines?: Record<string, string>;
 };
 
 async function pathIsDirectory(path: string): Promise<boolean> {
@@ -32,14 +31,12 @@ async function pathIsFile(path: string): Promise<boolean> {
 async function assertRepoRoot(): Promise<void> {
   const packageJsonPath = join(repoRoot, 'package.json');
   const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf8')) as PackageJson;
-  const workspaces = Array.isArray(packageJson.workspaces) ? packageJson.workspaces : [];
   const expectedScriptPath = join(repoRoot, 'scripts', 'clean.ts');
 
   const markers = [
     packageJson.private === true,
-    typeof packageJson.packageManager === 'string' && packageJson.packageManager.startsWith('bun@'),
+    packageJson?.engines?.bun,
     typeof packageJson.scripts?.clean === 'string' && packageJson.scripts.clean.includes('scripts/clean.ts'),
-    workspaces.includes('packages/*'),
     resolve(scriptPath) === resolve(expectedScriptPath),
     await pathIsFile(join(repoRoot, 'bun.lock')),
     await pathIsDirectory(join(repoRoot, 'packages')),
@@ -81,7 +78,7 @@ async function collectTargets(): Promise<string[]> {
   ]);
   const discoveredTsBuildInfoTargets: string[] = [];
 
-  for await (const match of new Bun.Glob('packages/*/**/*.tsbuildinfo').scan({ cwd: repoRoot })) {
+  for await (const match of new Glob('packages/*/**/*.tsbuildinfo').scan({ cwd: repoRoot })) {
     discoveredTsBuildInfoTargets.push(match);
   }
 
