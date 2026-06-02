@@ -1,6 +1,6 @@
 import { readdir, readFile, rm, stat } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
-import { fileURLToPath, argv, Glob } from 'bun';
+import { argv, fileURLToPath, Glob } from 'bun';
 
 const scriptPath = fileURLToPath(import.meta.url);
 const repoRoot = resolve(dirname(scriptPath), '..');
