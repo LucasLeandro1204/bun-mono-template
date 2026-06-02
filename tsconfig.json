@@ -2,10 +2,10 @@
   "files": [],
   "references": [
     {
-      "path": "./packages/shared"
+      "path": "./apps/cli"
     },
     {
-      "path": "./packages/app"
+      "path": "./packages/shared"
     }
   ]
 }

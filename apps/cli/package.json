@@ -1,5 +1,5 @@
 {
-  "name": "@bun-mono-template/app",
+  "name": "@bun-mono-template/cli",
   "version": "1.0.0",
   "private": true,
   "type": "module",

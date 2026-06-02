@@ -1,5 +1,5 @@
 ---
-'@bun-mono-template/app': patch
+'@bun-mono-template/cli': patch
 '@bun-mono-template/shared': patch
 ---
 

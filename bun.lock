@@ -18,8 +18,8 @@
         "typescript-eslint": "^8.60.1",
       },
     },
-    "packages/app": {
-      "name": "@bun-mono-template/app",
+    "apps/cli": {
+      "name": "@bun-mono-template/cli",
       "version": "1.0.0",
       "dependencies": {
         "@bun-mono-template/shared": "workspace:*",
@@ -37,7 +37,7 @@
   "packages": {
     "@babel/runtime": ["@babel/runtime@7.29.2", "", {}, "sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g=="],
 
-    "@bun-mono-template/app": ["@bun-mono-template/app@workspace:packages/app"],
+    "@bun-mono-template/cli": ["@bun-mono-template/cli@workspace:apps/cli"],
 
     "@bun-mono-template/shared": ["@bun-mono-template/shared@workspace:packages/shared"],
 

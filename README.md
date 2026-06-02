@@ -63,8 +63,8 @@ Equivalent `just` recipes are available as `just clean`, `just audit`, and `just
 
 ## Workspace Layout
 
+- `apps/cli` - cli package consuming `@bun-mono-template/shared`
 - `packages/shared` - internal shared library
-- `packages/app` - application package consuming `@bun-mono-template/shared`
 
 Workspace packages export compiled `dist/` artifacts for Bun and standard ESM consumers. Local TypeScript development resolves shared package source through `tsconfig.base.json` paths, so run `bun run build` before consuming packages outside the workspace.
 

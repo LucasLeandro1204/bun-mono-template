@@ -4,7 +4,7 @@ import perfectionist from 'eslint-plugin-perfectionist';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-const packages = ['@bun-mono-template/app', '@bun-mono-template/shared', '#root'];
+const packages = ['@bun-mono-template/cli', '@bun-mono-template/shared', '#root'];
 const internalGlobalPattern = `^(${packages
   .map((name) => name.replaceAll('/', '\\/').replaceAll('@', '\\@'))
   .join('|')})$`;
@@ -12,7 +12,7 @@ const internalGlobalPattern = `^(${packages
 export default tseslint.config(
   {
     name: 'bun-mono-template/ignore',
-    ignores: ['**/.adminjs/**', '**/coverage/**', '**/dist/**', '**/node_modules/**', '**/*.d.ts', '**/*.tsbuildinfo'],
+    ignores: ['**/coverage/**', '**/dist/**', '**/node_modules/**', '**/*.d.ts', '**/*.tsbuildinfo'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

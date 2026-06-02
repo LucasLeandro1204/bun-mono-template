@@ -6,6 +6,7 @@
   "description": "Production-ready Bun monorepo template with TypeScript references and workspace packages.",
   "license": "Apache-2.0",
   "workspaces": [
+    "apps/*",
     "packages/*"
   ],
   "catalog": {
@@ -21,15 +22,15 @@
     "clean": "bun run scripts/clean.ts",
     "clean:dry-run": "bun run scripts/clean.ts --dry-run",
     "deps:outdated": "bun outdated",
-    "dev": "bun run --filter @bun-mono-template/app dev",
+    "dev": "bun run --filter @bun-mono-template/cli dev",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
-    "start": "bun run --filter @bun-mono-template/app start",
+    "start": "bun run --filter @bun-mono-template/cli start",
     "test": "bun test --path-ignore-patterns '**/dist/**'",
     "test:coverage": "bun test --coverage --path-ignore-patterns '**/dist/**'",
-    "typecheck": "bun x tsc -p tsconfig.typecheck.json --noEmit && bun x tsc -p packages/shared/test/tsconfig.json --noEmit && bun x tsc -p packages/app/test/tsconfig.json --noEmit",
+    "typecheck": "bun x tsc -p tsconfig.typecheck.json --noEmit && bun x tsc -p packages/shared/test/tsconfig.json --noEmit && bun x tsc -p packages/cli/test/tsconfig.json --noEmit",
     "version-packages": "bun ./node_modules/@changesets/cli/bin.js version"
   },
   "devDependencies": {
